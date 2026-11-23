@@ -1,0 +1,23 @@
+name: VersatiaInteractions
+version: '${version}'
+main: dev.versatia.interactions.InteractionsPlugin
+api-version: '26.3'
+author: Versatia
+website: https://versatia.dev/
+description: Player-to-player requests from a menu opened with Shift + right click on a player.
+# Kotlin and kotlinx.coroutines classes come from VersatiaCore's class loader; do not list kotlin-stdlib or kotlinx-coroutines here
+depend:
+  - VersatiaCore
+# Optional: with the CommandAPI plugin installed, /interact answers offers from the chat line
+softdepend:
+  - CommandAPI
+permissions:
+  versatia.interactions.menu:
+    description: Opens the interaction menu with Shift + right click on a player.
+    default: true
+  versatia.interactions.command.interact:
+    description: Answers an offer with /interact accept or decline, as the chat line's buttons do.
+    default: true
+  versatia.interactions.exempt:
+    description: Nobody can open the interaction menu for this player or send them an offer (staff).
+    default: false

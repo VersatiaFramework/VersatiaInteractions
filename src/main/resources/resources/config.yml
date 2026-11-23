@@ -1,0 +1,43 @@
+# Extracted into the plugin's data folder on the first start; edit it there and run /versatia reload interactions.
+requests:
+  # How long an offer waits for an answer
+  timeout: 10s
+  # The waiting icon's stack size shows the seconds left
+  countdown: true
+  # Blocks; sending and accepting an offer need the two players this close, in the same world
+  max-distance: 16
+  # What ends a waiting offer besides its timeout: distance, world-change, death. Leaving the server always does
+  cancel-on: [distance, world-change, death]
+receiver:
+  # How the receiver hears of an offer besides the menu: chat, dialog or both
+  notify: chat
+window:
+  rows: 3
+# The item model of the button in each state; a server with a resource pack points them at its own,
+# an animated texture for waiting, say
+icons:
+  available: "minecraft:paper"
+  waiting: "minecraft:clock"
+  offered: "minecraft:lime_dye"
+  busy: "minecraft:gray_dye"
+  denied: "minecraft:barrier"
+  active: "minecraft:clock"
+# The sound of each moment, a sound key of the game or of the resource pack; '' plays nothing
+sounds:
+  offered: "minecraft:ui.button.click"
+  received: "minecraft:block.note_block.pling"
+  accepted: "minecraft:entity.player.levelup"
+  declined: "minecraft:block.note_block.bass"
+  expired: "minecraft:block.note_block.bass"
+  cancelled: "minecraft:block.note_block.bass"
+  busy: "minecraft:entity.villager.no"
+# Everything about one action in one place: its slot (0 is the top-left corner), and icons and
+# sounds (a voice line, say) replacing the defaults above for this action alone. An action not
+# listed takes the first free slot
+actions:
+  trade:
+    slot: 11
+    icons:
+      available: "minecraft:emerald"
+  duel:
+    slot: 15
