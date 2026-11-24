@@ -16,10 +16,11 @@ and [for server admins](https://versatia.dev/admin/experimental/interactions).
 
 ## Installing
 
-Put `VersatiaInteractions.jar` into `plugins/` next to VersatiaCore, and the plugins providing
-actions, such as VersatiaTrade. With the [CommandAPI](https://commandapi.dev/) plugin installed,
-`/interact accept <player> [action]` and `/interact decline <player> [action]` answer an offer,
-which is what the buttons of the receiver's chat line run; without it the menu still works.
+Put `VersatiaInteractions.jar` into `plugins/` next to VersatiaCore, which it requires. The other
+plugins are optional: those providing actions, such as VersatiaTrade, add the menu's buttons, and
+with the [CommandAPI](https://commandapi.dev/) plugin installed `/interact accept <player> [action]`
+and `/interact decline <player> [action]` answer an offer, which is what the buttons of the
+receiver's chat line run; without it the menu still works.
 
 | Permission | Default | Lets the player |
 |---|---|---|
