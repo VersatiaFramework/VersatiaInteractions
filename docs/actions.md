@@ -39,9 +39,10 @@ Every sentence about an action comes from its plugin's messages, under the prefi
 | `<prefix>.busy-self` | no | the reason when the viewer is busy with it |
 | `<prefix>.button.<state>.name`, `.lore` | no | replace VersatiaInteractions' `button.<state>.name` and `.lore` for this action |
 | `<prefix>.offer.<event>` | no | replace VersatiaInteractions' chat line `offer.<event>` (`sent`, `received`, `accepted`, `declined`, `expired`, `cancelled`) for this action, in its own words: `{sender} offers you a trade.` |
+| `<prefix>.dialog.<part>` | no | replace VersatiaInteractions' `dialog.<part>` (`title`, `body`, `accept`, `decline`) in the dialog of `receiver.notify: dialog` or `both`, for this action: `{sender} offers you a trade.` |
 
 A sentence the plugin does not have comes from VersatiaInteractions' own messages (`busy`,
-`busy-self`, `button.*`, `offer.*`), which name the action only as a bare name after a colon, so no
+`busy-self`, `button.*`, `offer.*`, `dialog.*`), which name the action only as a bare name after a colon, so no
 language has to inflect it. A plugin's own `offer.received` writes the answer buttons itself, as
 VersatiaInteractions' does: `<click:run_command:'/interact accept {sender.name} {action.id}'>`. A denial is a whole sentence the action builds itself:
 `InteractionCheck.Denied(messages["interaction.cannot-here"].get())`.

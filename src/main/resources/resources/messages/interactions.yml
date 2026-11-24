@@ -1,7 +1,8 @@
 # Arguments: {target} the other player, {sender} who sends or sent the offer, {action} the action's
 # bare name (written after a colon), {action.id} its id, {seconds} the seconds left, {reason} a whole
 # sentence from the action's plugin. For one action, its plugin's interaction.button.<state>.name and
-# .lore and interaction.offer.<event> replace these.
+# .lore, interaction.offer.<event> and interaction.dialog.<part> replace these.
+# <accept> is a style of this plugin; plugins/VersatiaCore/styles.yml says how it looks.
 window:
   title: "{target}"
 button:
@@ -31,7 +32,7 @@ button:
 offer:
   sent: "<neutral>Waiting for {target} to answer: {action}."
   # The buttons run /interact, a command that needs the CommandAPI plugin
-  received: "<neutral>{sender} offers you: {action}. <click:run_command:'/interact accept {sender.name} {action.id}'>[Accept]</click> <click:run_command:'/interact decline {sender.name} {action.id}'>[Decline]</click>"
+  received: "<neutral>{sender} offers you: {action}.      <click:run_command:'/interact accept {sender.name} {action.id}'><hover:show_text:'Accept the offer'><accept>[Click to accept]</accept></hover></click>"
   accepted: "<positive>{target} accepted: {action}."
   declined: "<negative>{target} declined: {action}."
   expired: "<warning>{target} did not answer in time: {action}."

@@ -23,8 +23,9 @@ import org.bukkit.entity.Player
 
 /**
  * What the players read and hear when a request changes: the messages of `offer.*` for the sender,
- * the chat line or dialog for the receiver, an action's own chat line replacing the default, and the
- * sound of each moment, an action's own sound, a voice line say, replacing the default.
+ * the chat line or dialog for the receiver, an action's own chat line and dialog replacing the
+ * defaults, and the sound of each moment, an action's own sound, a voice line say, replacing the
+ * default.
  */
 @LocalBean
 internal class RequestFeedback(
@@ -44,7 +45,7 @@ internal class RequestFeedback(
     fun received(receiver: Player, sender: Player, action: RegisteredAction, answer: (Boolean) -> Unit) {
         val arguments = sentences.arguments(receiver, sender, action.argument(), timeoutSeconds)
         if (settings.notify != ReceiverNotice.DIALOG) offer(action, "received").send(receiver, *arguments)
-        if (settings.notify != ReceiverNotice.CHAT) showDialog(receiver, arguments, answer)
+        if (settings.notify != ReceiverNotice.CHAT) showDialog(receiver, action, arguments, answer)
         play(receiver, action, Transition.RECEIVED)
     }
 
@@ -106,22 +107,25 @@ internal class RequestFeedback(
     /** The message of [event] of an offer of [action]: its plugin's own, VersatiaInteractions' `offer.<event>` otherwise. */
     private fun offer(action: RegisteredAction, event: String) = action.offer(event) ?: messages["offer.$event"]
 
+    /** The [part] of the dialog of an offer of [action]: its plugin's own, VersatiaInteractions' `dialog.<part>` otherwise. */
+    private fun dialog(action: RegisteredAction, part: String) = action.dialog(part) ?: messages["dialog.$part"]
+
     /** The sound of [transition] for [action], an action's own one as a voice line. */
     private fun play(player: Player, action: RegisteredAction?, transition: Transition) {
         val (key, own) = settings.sound(action?.id, transition)
         player.playSound(Sound.sound(key ?: return, if (own) Sound.Source.VOICE else Sound.Source.UI, 1f, 1f))
     }
 
-    private fun showDialog(receiver: Player, arguments: Array<Argument>, answer: (Boolean) -> Unit) {
+    private fun showDialog(receiver: Player, action: RegisteredAction, arguments: Array<Argument>, answer: (Boolean) -> Unit) {
         val options = ClickCallback.Options.builder().uses(1).lifetime(settings.timeout.toJavaDuration()).build()
         // A dialog click may arrive off the server thread; the scope runs the answer on it
-        fun button(key: String, accept: Boolean) = ActionButton.builder(messages[key].get(*arguments))
+        fun button(part: String, accept: Boolean) = ActionButton.builder(dialog(action, part).get(*arguments))
             .action(DialogAction.customClick({ _, _ -> scope.launch { answer(accept) } }, options))
             .build()
         val dialog = Dialog.create { factory ->
             factory.empty()
-                .base(DialogBase.builder(messages["dialog.title"].get(*arguments)).body(listOf(DialogBody.plainMessage(messages["dialog.body"].get(*arguments)))).build())
-                .type(DialogType.confirmation(button("dialog.accept", true), button("dialog.decline", false)))
+                .base(DialogBase.builder(dialog(action, "title").get(*arguments)).body(listOf(DialogBody.plainMessage(dialog(action, "body").get(*arguments)))).build())
+                .type(DialogType.confirmation(button("accept", true), button("decline", false)))
         }
         receiver.showDialog(dialog)
     }

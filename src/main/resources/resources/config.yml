@@ -1,7 +1,7 @@
 # Extracted into the plugin's data folder on the first start; edit it there and run /versatia reload interactions.
 requests:
   # How long an offer waits for an answer
-  timeout: 10s
+  timeout: 15s
   # The waiting icon's stack size shows the seconds left
   countdown: true
   # Blocks; sending and accepting an offer need the two players this close, in the same world

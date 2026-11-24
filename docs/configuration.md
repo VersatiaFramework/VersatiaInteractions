@@ -7,7 +7,7 @@ and differ.
 
 | Key | Mapper | Notes |
 |---|---|---|
-| `requests.timeout` | `PositiveDuration` | `10s`; longer than zero |
+| `requests.timeout` | `PositiveDuration` | `15s`; longer than zero |
 | `requests.countdown` | | the stack size of a waiting button counts the seconds down (up to 99) |
 | `requests.max-distance` | `Blocks` | sending and accepting need the two this close, in the same world |
 | `requests.cancel-on` | `CancelCauses` | `distance`, `world-change`, `death`; `quit` is accepted and always applies, since nobody offline can answer and the events need both players |

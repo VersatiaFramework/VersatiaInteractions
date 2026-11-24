@@ -30,7 +30,7 @@ receiver's chat line run; without it the menu still works.
 
 Players a vanish plugin hides, those the viewer cannot see, and NPCs cannot be asked either.
 
-`plugins/VersatiaInteractions/config.yml` sets the timeout (10 s), the distance, what cancels an
+`plugins/VersatiaInteractions/config.yml` sets the timeout (15 s), the distance, what cancels an
 offer, how the receiver hears of it (chat line, dialog or both), the window's rows, the item model
 of each state of a button, the sound of each moment, and per action its slot, icons and sounds (a
 voice line, say). `messages/interactions.yml` holds every text, naming the server's styles; the

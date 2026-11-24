@@ -17,7 +17,7 @@ class MappersTest {
 
     @Test
     fun `the shipped file reads`() {
-        assertEquals(10.seconds, PositiveDuration.map(shipped, "requests.timeout"))
+        assertEquals(15.seconds, PositiveDuration.map(shipped, "requests.timeout"))
         assertEquals(16, Blocks.map(shipped, "requests.max-distance"))
         assertEquals(setOf(CancelCause.DISTANCE, CancelCause.WORLD_CHANGE, CancelCause.DEATH), CancelCauses.map(shipped, "requests.cancel-on"))
         assertEquals(3, Rows.map(shipped, "window.rows"))

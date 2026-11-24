@@ -43,6 +43,9 @@ internal class RegisteredAction(
     /** The plugin's own chat line for [event] of an offer (`sent`, `received`, ...), replacing VersatiaInteractions' `offer.<event>`; null when it has none. */
     fun offer(event: String) = messages.getOrNull("$prefix.offer.$event")
 
+    /** The plugin's own [part] of an offer's dialog (`title`, `body`, `accept`, `decline`), replacing VersatiaInteractions' `dialog.<part>`; null when it has none. */
+    fun dialog(part: String) = messages.getOrNull("$prefix.dialog.$part")
+
     /** Whether the plugin's messages name the action; checked when it registers. */
     fun hasName() = "$prefix.name" in messages
 
